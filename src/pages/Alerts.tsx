@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import AlertSettingsComponent from '@/components/common/AlertSettings';
 import { generateAlertsData, type AlertData } from '@/utils/mockData';
 import { Bell, BellRing, Clock, MapPin, AlertTriangle, CheckCircle, Settings } from 'lucide-react';
 
@@ -106,9 +107,10 @@ const Alerts = () => {
       </div>
 
       <Tabs defaultValue="alerts" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="alerts">Alert History</TabsTrigger>
-          <TabsTrigger value="stats">Alert Statistics</TabsTrigger>
+          <TabsTrigger value="settings">Alert Settings</TabsTrigger>
+          <TabsTrigger value="stats">Statistics</TabsTrigger>
         </TabsList>
 
         <TabsContent value="alerts" className="space-y-6">
@@ -214,6 +216,10 @@ const Alerts = () => {
               ))
             )}
           </div>
+        </TabsContent>
+
+        <TabsContent value="settings" className="space-y-6">
+          <AlertSettingsComponent />
         </TabsContent>
 
         <TabsContent value="stats" className="space-y-6">
