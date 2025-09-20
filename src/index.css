@@ -1,88 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* AirGuard Pro Design System - Air Quality Themed Colors and Gradients */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    /* Base Colors */
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
+    /* Air Quality Theme Colors */
+    --primary: 210 100% 56%; /* Sky blue */
+    --primary-glow: 200 100% 70%;
+    --secondary: 142 76% 36%; /* Forest green for good air */
+    --secondary-glow: 142 76% 50%;
+    
+    /* Air Quality Status Colors */
+    --aqi-good: 120 100% 40%; /* Green */
+    --aqi-moderate: 60 100% 50%; /* Yellow */  
+    --aqi-unhealthy-sensitive: 30 100% 50%; /* Orange */
+    --aqi-unhealthy: 0 100% 50%; /* Red */
+    --aqi-very-unhealthy: 300 100% 25%; /* Purple */
+    --aqi-hazardous: 0 0% 20%; /* Maroon */
+    
+    /* Gradients */
+    --gradient-sky: linear-gradient(135deg, hsl(210 100% 56%), hsl(200 100% 70%));
+    --gradient-earth: linear-gradient(135deg, hsl(142 76% 36%), hsl(120 100% 40%));
+    --gradient-atmosphere: linear-gradient(180deg, hsl(210 40% 98%), hsl(210 100% 95%));
+    --gradient-pollution: linear-gradient(135deg, hsl(0 100% 50%), hsl(30 100% 50%));
+    
+    /* Shadows with air quality theme */
+    --shadow-air: 0 10px 30px -10px hsl(210 100% 56% / 0.3);
+    --shadow-glow: 0 0 40px hsl(200 100% 70% / 0.4);
+    --shadow-elevation: 0 20px 40px -12px hsl(222.2 84% 4.9% / 0.15);
+    
+    /* Animation timing */
+    --animation-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --animation-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Shadcn overrides with air quality theme */
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 210 100% 56%;
+    --radius: 0.75rem;
 
-    --radius: 0.5rem;
-
+    /* Rest of existing shadcn variables... */
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
+    /* Air Quality Dark Theme */
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
+    --primary: 200 100% 70%;
+    --primary-glow: 210 100% 80%;
+    --secondary: 142 76% 50%;
+    --secondary-glow: 142 80% 60%;
+    
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 200 100% 70%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +108,62 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-[Inter];
   }
+}
+
+@layer components {
+  /* Air Quality Status Components */
+  .aqi-good { @apply text-green-600 bg-green-50 border-green-200; }
+  .aqi-moderate { @apply text-yellow-600 bg-yellow-50 border-yellow-200; }
+  .aqi-unhealthy-sensitive { @apply text-orange-600 bg-orange-50 border-orange-200; }
+  .aqi-unhealthy { @apply text-red-600 bg-red-50 border-red-200; }
+  .aqi-very-unhealthy { @apply text-purple-600 bg-purple-50 border-purple-200; }
+  .aqi-hazardous { @apply text-gray-900 bg-gray-100 border-gray-300; }
+
+  /* Animated Elements */
+  .floating-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+  
+  .slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+}
+
+@layer utilities {
+  /* Custom Gradients */
+  .bg-gradient-sky { background: var(--gradient-sky); }
+  .bg-gradient-earth { background: var(--gradient-earth); }
+  .bg-gradient-atmosphere { background: var(--gradient-atmosphere); }
+  .bg-gradient-pollution { background: var(--gradient-pollution); }
+  
+  /* Custom Shadows */
+  .shadow-air { box-shadow: var(--shadow-air); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-elevation { box-shadow: var(--shadow-elevation); }
+  
+  /* Transitions */
+  .transition-smooth { transition: var(--animation-smooth); }
+  .transition-bounce { transition: var(--animation-bounce); }
+}
+
+/* Keyframe Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.6); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
